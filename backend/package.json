@@ -1,0 +1,15 @@
+{
+  "name": "estufa-iot-backend",
+  "version": "1.0.0",
+  "description": "Backend do projeto EstufaIoT - recebe dados do ESP32 via MQTT e serve o dashboard em tempo real",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.1",
+    "express": "^4.19.2",
+    "mqtt": "^5.7.0",
+    "socket.io": "^4.7.5"
+  }
+}

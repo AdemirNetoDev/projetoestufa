@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EstufaIoT — Painel de Monitoramento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="fundo-organico" aria-hidden="true"></div>
+
+  <header class="topo">
+    <div class="marca">
+      <span class="folha-pulso" id="folhaPulso"></span>
+      <div>
+        <h1>EstufaIoT</h1>
+        <p class="subtitulo">Monitoramento e automação de ambiente · ESP32</p>
+      </div>
+    </div>
+    <div class="status-conexao" id="statusConexao">
+      <span class="ponto"></span> conectando…
+    </div>
+  </header>
+
+  <main class="conteudo">
+
+    <section class="alerta-faixa" id="faixaAlerta" hidden>
+      <span id="textoAlerta"></span>
+    </section>
+
+    <section class="grade-sensores">
+      <article class="cartao-sensor" data-tipo="temperatura">
+        <span class="rotulo">Temperatura</span>
+        <span class="valor"><span id="valorTemp">--</span><small>°C</small></span>
+        <div class="barra"><div class="barra-preenchimento" id="barraTemp"></div></div>
+        <span class="legenda-barra">limite de ventilação: 28°C · alarme: 35°C</span>
+      </article>
+
+      <article class="cartao-sensor" data-tipo="umidade">
+        <span class="rotulo">Umidade</span>
+        <span class="valor"><span id="valorUmid">--</span><small>%</small></span>
+        <div class="barra"><div class="barra-preenchimento" id="barraUmid"></div></div>
+        <span class="legenda-barra">faixa ideal: 40–70%</span>
+      </article>
+
+      <article class="cartao-sensor" data-tipo="luz">
+        <span class="rotulo">Luminosidade</span>
+        <span class="valor"><span id="valorLuz">--</span><small>%</small></span>
+        <div class="barra"><div class="barra-preenchimento" id="barraLuz"></div></div>
+        <span class="legenda-barra">leitura relativa do LDR</span>
+      </article>
+    </section>
+
+    <section class="grade-principal">
+      <div class="painel painel-grafico">
+        <div class="painel-cabecalho">
+          <h2>Histórico ao vivo</h2>
+          <span class="hint">últimas <span id="qtdLeituras">0</span> leituras</span>
+        </div>
+        <canvas id="graficoHistorico" height="260"></canvas>
+      </div>
+
+      <div class="painel painel-controles">
+        <div class="painel-cabecalho">
+          <h2>Atuadores</h2>
+        </div>
+
+        <div class="controle-linha">
+          <div>
+            <span class="controle-titulo">Ventilador (relé)</span>
+            <span class="controle-desc" id="fanModo">modo automático</span>
+          </div>
+          <label class="interruptor">
+            <input type="checkbox" id="toggleFan" />
+            <span class="trilho"></span>
+          </label>
+        </div>
+
+        <div class="controle-linha">
+          <div>
+            <span class="controle-titulo">LED indicativo</span>
+            <span class="controle-desc">controle manual</span>
+          </div>
+          <label class="interruptor">
+            <input type="checkbox" id="toggleLed" />
+            <span class="trilho"></span>
+          </label>
+        </div>
+
+        <p class="nota-controle">
+          O ventilador liga sozinho ao passar de 28°C. Usar o interruptor
+          assume o controle manual até o próximo reinício do ESP32.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    IFF Campus Itaperuna · Fundamentos de IoT · Projeto Final
+  </footer>
+
+ <script src="/socket.io/socket.io.js"></script>
+ <script src="chart.umd.js"></script>
+ <script src="app.js"></script>
+</body>
+</html>
