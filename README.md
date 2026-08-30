@@ -90,6 +90,9 @@ real, sem precisar estar fisicamente no local.
 5. Abra o Monitor Serial (115200 baud) para acompanhar as leituras e a
    conexão.
 
+### 6.1b Simulação no Wokwi
+https://wokwi.com/projects/473754271599986689
+
 ### 6.2 Backend + Dashboard
 
 ```bash
