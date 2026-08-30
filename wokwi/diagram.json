@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "author": "EstufaIoT",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": -50, "attrs": {} },
+
+    { "type": "wokwi-dht22", "id": "dht1", "top": -160, "left": 200, "attrs": { "temperature": "24", "humidity": "55" } },
+    { "type": "wokwi-resistor", "id": "r_pullup", "top": -190, "left": 320, "attrs": { "value": "10000" } },
+
+    { "type": "wokwi-photoresistor-sensor", "id": "ldr1", "top": -20, "left": 380, "attrs": {} },
+
+    { "type": "wokwi-led", "id": "led_indicativo", "top": 60, "left": 200, "attrs": { "color": "green", "label": "LED indicativo" } },
+    { "type": "wokwi-resistor", "id": "r_led", "top": 60, "left": 160, "attrs": { "value": "220" } },
+
+    { "type": "wokwi-buzzer", "id": "buzzer1", "top": 140, "left": 200, "attrs": {} },
+
+    { "type": "wokwi-relay-module", "id": "relay1", "top": -160, "left": -260, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc_fan", "top": -260, "left": -340, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd_fan", "top": -60, "left": -180, "attrs": {} },
+    { "type": "wokwi-resistor", "id": "r_fan", "top": -160, "left": -180, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "led_ventilador", "top": -160, "left": -120, "attrs": { "color": "yellow", "label": "Ventilador (rele)" } }
+  ],
+  "connections": [
+    ["esp:TX0", "$serialMonitor:RX", "", []],
+    ["esp:RX0", "$serialMonitor:TX", "", []],
+
+    ["esp:3V3", "dht1:VCC", "red", []],
+    ["esp:GND.1", "dht1:GND", "black", []],
+    ["esp:D4", "dht1:SDA", "green", []],
+    ["dht1:VCC", "r_pullup:1", "red", []],
+    ["r_pullup:2", "dht1:SDA", "green", []],
+
+    ["esp:3V3", "ldr1:VCC", "red", []],
+    ["esp:GND.1", "ldr1:GND", "black", []],
+    ["esp:D34", "ldr1:AO", "blue", []],
+
+    ["esp:D27", "r_led:1", "green", []],
+    ["r_led:2", "led_indicativo:A", "green", []],
+    ["led_indicativo:C", "esp:GND.2", "black", []],
+
+    ["esp:D25", "buzzer1:2", "orange", []],
+    ["buzzer1:1", "esp:GND.2", "black", []],
+
+    ["esp:D26", "relay1:IN", "green", []],
+    ["esp:3V3", "relay1:VCC", "red", []],
+    ["esp:GND.2", "relay1:GND", "black", []],
+    ["relay1:COM", "vcc_fan:VCC", "red", []],
+    ["relay1:NO", "r_fan:1", "yellow", []],
+    ["r_fan:2", "led_ventilador:A", "yellow", []],
+    ["led_ventilador:C", "gnd_fan:GND", "black", []]
+  ],
+  "dependencies": {}
+}
