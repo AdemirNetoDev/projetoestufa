@@ -4,7 +4,7 @@
 **Disciplina:** Fundamentos de IoT — Projeto Final
 **IFF Campus Itaperuna**
 
-> Preencha aqui os nomes da equipe antes de entregar.
+> Ademir Neto, Estevão Gaviolle, João Alberto Salles e Cauã Olvieira.
 
 ---
 
